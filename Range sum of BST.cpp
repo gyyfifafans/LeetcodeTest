@@ -7,6 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+//高級。。
 class Solution {
 public:
     int rangeSumBST(TreeNode* root, int L, int R) {
@@ -29,7 +30,24 @@ public:
     }
 };
 
-
+//一般想法
+class Solution {
+public:    
+    int rangeSumBST(TreeNode* root, int L, int R) {
+        if(root == NULL) return 0;
+        if (root->val < L) 
+        {
+            return  rangeSumBST(root->right, L, R);
+        }
+        else if (root->val > R)
+        {
+            return  rangeSumBST(root->left, L, R);
+        }
+        else {
+            return rangeSumBST(root->left, L, R) + rangeSumBST(root->right, L, R) + root->val;
+        }
+    }
+};
 /*
 
 1. 若它的左子树不为空，那么左子树上所有节点的key都小于根节点的key。
